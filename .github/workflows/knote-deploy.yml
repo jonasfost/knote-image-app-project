@@ -17,7 +17,7 @@ permissions:
   security-events: write
 
 jobs:
-  Build knote image:
+  build knote image:
     # if: github.ref == 'refs/heads/image-app-build' && github.event_name == 'push'
     name: Build knote and Scan Docker Image
     runs-on: ubuntu-latest
