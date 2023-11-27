@@ -16,7 +16,7 @@ permissions:
 jobs:
   build-knote-image:
     # if: github.ref == 'refs/heads/image-app-build' && github.event_name == 'push'
-    name: Build knote App image and Scan Docker Image
+    name: Build-Scan-Publish Image to Docker Hub
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
