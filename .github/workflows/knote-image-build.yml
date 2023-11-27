@@ -16,7 +16,7 @@ permissions:
 jobs:
   build-knote-image:
     # if: github.ref == 'refs/heads/image-app-build' && github.event_name == 'push'
-    name: Build knote and Scan Docker Image
+    name: Build knote App image and Scan Docker Image
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
@@ -27,7 +27,7 @@ jobs:
       uses: docker/setup-qemu-action@v3
 
      # Build and tag Image 
-    - name: Build and tag Image
+    - name: Build and Tag Image
       # if: github.ref == 'refs/heads/image-app-build' && github.event_name == 'push'
       run: |
         docker build -t ${{env.DOCKER_USER}}/${{env.DOCKER_REPOSITORY}}:${{env.NODE_IMAGE_TAG}} .
@@ -42,14 +42,14 @@ jobs:
         dockerfile: ./Dockerfile
         severity: 'CRITICAL,HIGH,MEDIUM'
 
-    - name: Upload SARIF file
+    - name: Upload Scan Result SARIF file to GitHub Code Scanning
       # if: github.ref == 'refs/heads/image-app-build' && github.event_name == 'push'
       if: ${{ steps.scan.outputs.sarif != '' }}
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}
        
-    - name: Push Image to Docker Hub
+    - name: Push Image built to Docker Hub private repository
       # if: github.ref == 'refs/heads/image-app-build' && github.event_name == 'push'   
       run: |
         docker login -u ${{env.DOCKER_USER}} -p ${{env.DOCKER_PASSWORD}}
