@@ -30,7 +30,7 @@ jobs:
     - name: Build and Tag Image
       # if: github.ref == 'refs/heads/image-app-build' && github.event_name == 'push'
       run: |
-        docker build -t ${{env.DOCKER_USER}}/${{env.DOCKER_REPOSITORY}}:${{env.NODE_IMAGE_TAG}} .
+        docker build -t ${{env.DOCKER_USER}}/${{env.DOCKER_REPOSITORY}}:${{env.NODE_IMAGE_TAG}} ./knote
         
     - name: Run Trivy vulnerability scanner
       # if: github.ref == 'refs/heads/image-app-build' && github.event_name == 'push'
